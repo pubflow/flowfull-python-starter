@@ -1,0 +1,31 @@
+Flowfull Python Starter — Full guide for LLMs
+
+Architecture:
+- FastAPI (`app/main.py`), CORS, startup/shutdown events.
+- Auth: `app/lib/auth/bridge_validator.py` (Flowless), `middleware.py` (`require_auth`, `optional_auth`, `require_user_type`).
+- DB: `app/lib/database/connection.py` (AsyncEngine, AsyncSession), dialect auto-detection.
+- Routes: `app/routes/api.py`, `app/routes/health.py`.
+- Models: `app/models/user.py`.
+
+Configuration:
+- `.env` with `DATABASE_URL`, `FLOWLESS_API_URL`, `BRIDGE_VALIDATION_SECRET`, `AUTH_VALIDATION_MODE`, CORS, optional `REDIS_URL`.
+- Migrations via Alembic.
+
+Patterns:
+- Bridge Validation uses `POST /auth/bridge/validate` with `X-Bridge-Secret`.
+- Hybrid cache: in-memory LRU with optional Redis.
+- User responses via `UserResponse` (includes optional `last_name`).
+- Admin-only for `/api/v1/users`, `/api/v1/users/{user_id}`, `/api/v1/admin/users`.
+
+Best practices:
+- Avoid reserved names (e.g., `metadata` in SQLAlchemy models; use `user_metadata`).
+- Use `structlog` for error handling and Pydantic for responses.
+- On Windows, prefer `--host 127.0.0.1` or add firewall rule when using `0.0.0.0`.
+
+Requests to the LLM should:
+- Maintain project style and conventions.
+- Avoid unnecessary dependencies.
+- Propose minimal, safe changes.
+- Include concrete commands to try changes when possible.
+
+Quick references: see `docs/` for friendly guides.
