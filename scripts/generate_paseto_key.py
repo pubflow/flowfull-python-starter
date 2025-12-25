@@ -9,6 +9,8 @@ Usage:
     python scripts/generate_paseto_key.py
 """
 
+import secrets
+
 from pyseto import Key
 
 
@@ -16,8 +18,9 @@ def generate_paseto_key() -> None:
     """Generate and display a new PASETO v4 private key."""
     print("🔑 Generating PASETO v4 Private Key...\n")
 
-    # Generate Ed25519 key pair for PASETO v4
-    private_key = Key.new(version=4, purpose="local", key=None)
+    # Generate random 32-byte key for PASETO v4.local (symmetric encryption)
+    random_key = secrets.token_bytes(32)
+    private_key = Key.new(version=4, purpose="local", key=random_key)
 
     # Convert to PASERK format
     paserk = private_key.to_paserk()
