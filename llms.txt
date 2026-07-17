@@ -3,7 +3,7 @@ Flowfull Python Starter — Short context for LLMs:
 - FastAPI + SQLAlchemy (async) + Bridge Validation (Flowless).
 - Auth via `X-Session-Id`; server validates with `X-Bridge-Secret`.
 - DB autodetected from `DATABASE_URL` (Postgres, CockroachDB, MySQL, SQLite/LibSQL).
-- Dependencies: `require_auth`, `optional_auth`, `require_user_type`.
+- Dependencies: `require_auth`, `optional_auth`, `require_admin`, `require_user_type`.
 - Admin-only endpoints: `/api/v1/users`, `/api/v1/users/{user_id}`, `/api/v1/admin/users`.
 
 Common tasks:

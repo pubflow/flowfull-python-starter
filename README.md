@@ -191,10 +191,10 @@ async def get_content(session: Optional[SessionData] = Depends(optional_auth)) -
 ### User Type Restriction
 
 ```python
-from app.lib.auth.middleware import require_user_type
+from app.lib.auth.middleware import require_admin, require_user_type
 
 @router.get("/admin")
-async def admin_route(session: SessionData = Depends(require_user_type("admin"))) -> dict:
+async def admin_route(session: SessionData = Depends(require_admin)) -> dict:
     return {"message": "Admin access granted"}
 ```
 
